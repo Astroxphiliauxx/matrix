@@ -31,6 +31,7 @@ class _NoteDetailState extends State<NoteDetail> {
     'Important & not Urgent',
     'Unimportant & not Urgent'
   ];
+  bool _isTitleEmpty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +76,19 @@ class _NoteDetailState extends State<NoteDetail> {
               controller: titleController,
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               onChanged: (value){
+                setState(() {
+                  _isTitleEmpty = value.isEmpty;
+                });
                 debugPrint('something has changed in text field');
                 updateTitle();
               },
 
+
               decoration: InputDecoration(
                 labelText: 'Title',
                 labelStyle: TextStyle(),
+                errorText: _isTitleEmpty ? 'Title can\'t be empty' : null,
+
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)
               ),
             ),
@@ -179,6 +186,9 @@ class _NoteDetailState extends State<NoteDetail> {
     if(note.id!=null){
       result= await helper.updateNote(note);
     }
+    else if(note.title!=null){
+      result=0;
+    }
     else{
       result=  await helper.insertNote(note);
     }
@@ -188,7 +198,7 @@ class _NoteDetailState extends State<NoteDetail> {
        cupertinoDialog('Status', 'Note Saved Successfully');
     }
     else{
-      cupertinoDialog("Status", 'Error while saving');
+      cupertinoDialog("Status", 'Not Saved');
     }
 
   }

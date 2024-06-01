@@ -17,28 +17,18 @@ class Note {
   String get title => _title;
 
   set title(String newTitle){
-
       this._title = newTitle;
-
-
   }
+
   set description(String newDescription){
-
       this._description = newDescription;
-
-
   }
   set date(String newDate){
-
       this._date = newDate;
-
-
   }
+
   set priority(int newPriority){
-
       this._priority = newPriority;
-
-
   }
   //convert a note object into a Map object
 

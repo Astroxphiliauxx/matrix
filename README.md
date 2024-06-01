@@ -1,6 +1,6 @@
 # noteapp
 
-A new Flutter project.
+SQFLite
 
 ## Getting Started
 

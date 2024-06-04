@@ -33,6 +33,13 @@ class _NoteDetailState extends State<NoteDetail> {
   ];
   bool _isTitleEmpty = false;
 
+   @override
+   void initState() {
+     super.initState();
+     titleController.text = note.title;
+     descriptionController.text = note.description;
+   }
+
   @override
   Widget build(BuildContext context) {
 
@@ -122,7 +129,9 @@ class _NoteDetailState extends State<NoteDetail> {
                 ElevatedButton(
                     onPressed: (){
                       setState(() {
-                         _save();
+                         if(note.title.isNotEmpty){
+                           _save();
+                         }
                       });
                     },
                     child: Text('Save')),
@@ -185,9 +194,6 @@ class _NoteDetailState extends State<NoteDetail> {
     int result;
     if(note.id!=null){
       result= await helper.updateNote(note);
-    }
-    else if(note.title!=null){
-      result=0;
     }
     else{
       result=  await helper.insertNote(note);

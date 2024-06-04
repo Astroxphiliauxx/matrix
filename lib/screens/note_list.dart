@@ -59,6 +59,8 @@ class _NoteListState extends State<NoteList> {
          ],
 
       ),
+      backgroundColor: Colors.grey,
+
       body:  Padding(
         padding: const EdgeInsets.all(15.0),
         child: Container(
@@ -71,8 +73,8 @@ class _NoteListState extends State<NoteList> {
                   alignment: Alignment.bottomCenter,
 
                   child: Container(
-                    height: MediaQuery.of(context).size.height-740,
-                    width:  MediaQuery.of(context).size.width-50,
+                    height: 50,
+                    width:  MediaQuery.of(context).size.width,
                     
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -88,7 +90,7 @@ class _NoteListState extends State<NoteList> {
                           ),
                         ),
                         onPressed: (){
-                          navigateToDetail( Note('', 2, '',''), 'Add Note');
+                          navigateToDetail( Note('', 1, '',''), 'Add Note');
                         },
                         child: Text("Add Matrix"),
                     ),
@@ -104,29 +106,41 @@ class _NoteListState extends State<NoteList> {
         itemCount: count,
         itemBuilder: (BuildContext context, int position){
           return Card(
-
-            elevation: 3,
-            color: Colors.white30,
-            child: ListTile(
-
-              onTap: (){
-                navigateToDetail(this.noteList[position],'Edit Note');
-              },
-              leading: CircleAvatar(
-                backgroundColor: getPriorityColor(this.noteList[position].priority),
-                child: getPriorityIcon(this.noteList[position].priority)
-              ),
-
-              title: Text(this.noteList[position].title),
-              subtitle: Text(this.noteList[position].date),
-              trailing: IconButton(
-                onPressed: (){
-                  _delete(context, noteList[position]);
-                },
-                icon: Icon(Icons.delete) ,
+            margin: EdgeInsets.only(bottom: 8.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+              // Sets the border radius to 30
+            ),
+           
+            //color: Color.fromARGB(0.1, 12, 12, 1),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              // Ensures the child respects the border radius
+              child: Container(
+                color: Colors.white10, // Background color of the ListTile
+                child: ListTile(
+                  selectedTileColor: Colors.black12,
+                  onTap: () {
+                    navigateToDetail(this.noteList[position], 'Edit Note');
+                  },
+                  leading: CircleAvatar(
+                    backgroundColor: getPriorityColor(this.noteList[position].priority),
+                    child: getPriorityIcon(this.noteList[position].priority),
+                  ),
+                  title: Text(this.noteList[position].title),
+                  subtitle: Text(this.noteList[position].date),
+                  trailing: IconButton(
+                    onPressed: () {
+                      cupertinoDialogDelete("Delete", "You want to delete this note?", position);
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
+                ),
               ),
             ),
           );
+
+
         }
     );
   }
@@ -194,5 +208,31 @@ class _NoteListState extends State<NoteList> {
     if (result == true) {
       updateListView();
     }
+  }
+
+  Future<void> cupertinoDialogDelete(String title, String content, int position) async{
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return CupertinoAlertDialog(
+            title:  Text(title),
+            content: Text(content),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text('Yes'),
+                onPressed: (){
+                  _delete(context, noteList[position]);
+                  Navigator.of(context).pop();
+                },
+              ),
+              CupertinoDialogAction(
+                  child: Text("No"),
+              onPressed: (){
+                    Navigator.of(context).pop();
+              },)
+            ],
+          );
+        }
+    );
   }
 }

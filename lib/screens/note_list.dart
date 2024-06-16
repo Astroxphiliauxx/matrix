@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:noteapp/screens/note_detail.dart';
 import 'package:noteapp/utlis/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
@@ -62,13 +63,34 @@ class _NoteListState extends State<NoteList> {
       backgroundColor: Colors.grey,
 
       body:  Padding(
+
         padding: const EdgeInsets.all(15.0),
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
-              getNoteListView(),
+              noteList.isEmpty ?
+                Center(
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                     children: [
+                        Lottie.asset(
+                         'assets/empty_list.json',
+                         width: 400,
+                         height: 400,
+                         fit: BoxFit.fill,
+                       ),
+                       Text("Matrix is empty !!",
+                       style: TextStyle(
+
+                         fontSize: 24
+                       ),)
+                     ],
+                   ),
+                ): getNoteListView(),
+
+
               Align(
                   alignment: Alignment.bottomCenter,
 
@@ -105,6 +127,7 @@ class _NoteListState extends State<NoteList> {
      return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext context, int position){
+
           return Card(
             margin: EdgeInsets.only(bottom: 8.0),
             shape: RoundedRectangleBorder(
@@ -114,8 +137,7 @@ class _NoteListState extends State<NoteList> {
            
             //color: Color.fromARGB(0.1, 12, 12, 1),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              // Ensures the child respects the border radius
+              borderRadius: BorderRadius.circular(15), // Ensures the child respects the border radius
               child: Container(
                 color: Colors.white10, // Background color of the ListTile
                 child: ListTile(

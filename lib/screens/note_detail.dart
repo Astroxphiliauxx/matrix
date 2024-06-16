@@ -32,6 +32,7 @@ class _NoteDetailState extends State<NoteDetail> {
     'Unimportant & not Urgent'
   ];
   bool _isTitleEmpty = false;
+  bool _isTitleLarge= false;
 
    @override
    void initState() {
@@ -85,8 +86,14 @@ class _NoteDetailState extends State<NoteDetail> {
               onChanged: (value){
                 setState(() {
                   _isTitleEmpty = value.isEmpty;
+                  if(value.length>=25){
+                    _isTitleLarge=true;
+                  }
+                  else {
+                    _isTitleLarge= false;
+                  }
                 });
-                debugPrint('something has changed in text field');
+
                 updateTitle();
               },
 
@@ -94,7 +101,9 @@ class _NoteDetailState extends State<NoteDetail> {
               decoration: InputDecoration(
                 labelText: 'Title',
                 labelStyle: TextStyle(),
-                errorText: _isTitleEmpty ? 'Title can\'t be empty' : null,
+
+                 errorText: !_isTitleEmpty ? _isTitleLarge? ' Title can\'t be this large': null :'Title can\'t be empty' ,
+
 
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)
               ),
@@ -108,7 +117,7 @@ class _NoteDetailState extends State<NoteDetail> {
                 controller: descriptionController,
                 style: TextStyle(),
                 onChanged: (value){
-                  debugPrint('something has changed in text field');
+
                   updateDescription();
                 },
 

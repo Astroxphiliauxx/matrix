@@ -27,100 +27,152 @@ class _NoteListState extends State<NoteList> {
       updateListView();
     }
 
-    return Scaffold(
-      appBar: AppBar(
-          actionsIconTheme: IconThemeData(
-            size: 30.0,
-            color: Colors.black,
-
-          ),
-          backgroundColor: Colors.blueGrey,
-          title: Text('The Eisenhower Matrix',
-          textAlign: TextAlign.left),
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 21
-          ),
-          leading: GestureDetector(
-              onTap: (){},
-              child: Icon(Icons.menu,
-           ),
-          ),
-          automaticallyImplyLeading: false,
-          actions: [
-           Padding(
-               padding: EdgeInsets.only(right: 20.0),
-               child: GestureDetector(
-                 onTap: () {},
-                 child: Icon(
-                     Icons.more_vert
-                 ),
-               )
-           ),
-         ],
-
-      ),
-      backgroundColor: Colors.grey,
-
-      body:  Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  noteList.isEmpty
-                      ? Center(
-                          child: Column(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           children: [
-                             Lottie.asset( 'assets/empty_list.json',
-                               width: 400,
-                               height: 400,
-                               fit: BoxFit.fill,
-                             ),
-                             Text(
-                             "Matrix is empty !!",
-                              style: TextStyle(
-                                 fontSize: 24,
-                               ),
-                              ),
-                           ],
-                          ),
-                       ) : getNoteListView(),
-                ],
-              ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+            actionsIconTheme: IconThemeData(
+              size: 30.0,
+              color: Colors.black,
+      
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 40,
-                margin: const EdgeInsets.only(top: 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.blueGrey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () {
-                    navigateToDetail(Note('', 1, '', ''), 'Add Note');
-                  },
-                  child: Text("Add Matrix"),
+            backgroundColor: Colors.blueGrey,
+            title: Text('The Eisenhower Matrix',
+            textAlign: TextAlign.left),
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 21
+            ),
+            // leading: GestureDetector(
+            //     onTap: (){
+            //
+            //     },
+            //     child: Icon(Icons.menu,
+            //  ),
+            // ),
+            automaticallyImplyLeading: true,
+            actions: [
+             Padding(
+                 padding: EdgeInsets.only(right: 20.0),
+                 child: GestureDetector(
+                   onTap: () {},
+                   child: Icon(
+                       Icons.more_vert
+                   ),
+                 )
+             ),
+           ],
+      
+        ),
+        backgroundColor: Colors.grey,
+      
+        body:  Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    noteList.isEmpty
+                        ? Center(
+                            child: Column(
+                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                             children: [
+                               Lottie.asset( 'assets/empty_list.json',
+                                 width: 400,
+                                 height: 400,
+                                 fit: BoxFit.fill,
+                               ),
+                               Text(
+                               "Matrix is empty !!",
+                                style: TextStyle(
+                                   fontSize: 24,
+                                 ),
+                                ),
+                             ],
+                            ),
+                         ) : getNoteListView(),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  margin: const EdgeInsets.only(top: 5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shadowColor: Colors.black,
+                      backgroundColor: Colors.blueGrey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      navigateToDetail(Note('', 1, '', ''), 'Add Note');
+                    },
+                    child: Text("Add Matrix"),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      )
-
+      
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              const DrawerHeader(
+                child: Text("Header"),
+                decoration: BoxDecoration(color: Colors.blue),
+              ),
+              ListTile(
+                title: const Text("Text1"),
+                leading: const Icon(Icons.railway_alert_rounded),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text("Text1"),
+                leading: const Icon(Icons.offline_pin_rounded),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text("Text2"),
+                leading: const Icon(Icons.key),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text("Text3"),
+                leading: const Icon(Icons.hail),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text("Text4"),
+                leading: const Icon(Icons.back_hand),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+      
+            ],
+          ),
+        ),
+      
+      ),
     );
   }
   ListView getNoteListView(){

@@ -63,64 +63,64 @@ class _NoteListState extends State<NoteList> {
       backgroundColor: Colors.grey,
 
       body:  Padding(
-
-        padding: const EdgeInsets.all(15.0),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Stack(
-            children: [
-              noteList.isEmpty ?
-                Center(
-                   child: Column(
-                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                     children: [
-                        Lottie.asset(
-                         'assets/empty_list.json',
-                         width: 400,
-                         height: 400,
-                         fit: BoxFit.fill,
-                       ),
-                       Text("Matrix is empty !!",
-                       style: TextStyle(
-
-                         fontSize: 24
-                       ),)
-                     ],
-                   ),
-                ): getNoteListView(),
-
-
-              Align(
-                  alignment: Alignment.bottomCenter,
-
-                  child: Container(
-                    height: 50,
-                    width:  MediaQuery.of(context).size.width,
-                    
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shadowColor: Colors.black,
-                          backgroundColor: Colors.blueGrey,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  noteList.isEmpty
+                      ? Center(
+                          child: Column(
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                           children: [
+                             Lottie.asset( 'assets/empty_list.json',
+                               width: 400,
+                               height: 400,
+                               fit: BoxFit.fill,
+                             ),
+                             Text(
+                             "Matrix is empty !!",
+                              style: TextStyle(
+                                 fontSize: 24,
+                               ),
+                              ),
+                           ],
                           ),
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: (){
-                          navigateToDetail( Note('', 1, '',''), 'Add Note');
-                        },
-                        child: Text("Add Matrix"),
+                       ) : getNoteListView(),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 40,
+                margin: const EdgeInsets.only(top: 5),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.blueGrey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                  ))
-            ],
-          ),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () {
+                    navigateToDetail(Note('', 1, '', ''), 'Add Note');
+                  },
+                  child: Text("Add Matrix"),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
+      )
+
     );
   }
   ListView getNoteListView(){

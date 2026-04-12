@@ -46,13 +46,6 @@ class _NoteListState extends State<NoteList> {
               color: Colors.black,
               fontSize: 21
             ),
-            // leading: GestureDetector(
-            //     onTap: (){
-            //
-            //     },
-            //     child: Icon(Icons.menu,
-            //  ),
-            // ),
             automaticallyImplyLeading: true,
             actions: [
              Padding(
@@ -191,10 +184,9 @@ class _NoteListState extends State<NoteList> {
             margin: EdgeInsets.only(bottom: 8.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
-              // Sets the border radius to 30
+
             ),
 
-            //color: Color.fromARGB(0.1, 12, 12, 1),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15), // Ensures the child respects the border radius
               child: Container(
@@ -223,7 +215,7 @@ class _NoteListState extends State<NoteList> {
                         onPressed: () {
                          noteListState.toggleNoteLock(position);
                         },
-                        icon: const Icon(Icons.lock_open_rounded),
+                        icon:  noteListState.isNoteLocked(position)? Icon(Icons.lock) : Icon(Icons.lock_open_rounded),
                       ),
 
 

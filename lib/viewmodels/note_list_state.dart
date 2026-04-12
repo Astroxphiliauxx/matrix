@@ -16,6 +16,7 @@ class NoteListState with ChangeNotifier {
 
   bool isNoteLocked(int index) {
     return _noteLockedStates[index];
+
   }
 
 }

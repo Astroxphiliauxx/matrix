@@ -1,16 +1,38 @@
-# noteapp
+# Eisenhower Matrix
 
-SQFLite
+A minimalist and efficient task prioritization application built with **Flutter** and **SQFLite**. This app utilizes the [Eisenhower Matrix](https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method) to help users sort their tasks by urgency and importance, ensuring maximum productivity.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application.
+- **Four-Quadrant Task Sorting:** Organize tasks seamlessly into Do (Urgent & Important), Schedule (Important, Not Urgent), Delegate (Urgent, Not Important), and Delete (Neither).
+- **Local Data Persistence:** All data is securely and efficiently stored on-device using SQLite (`sqflite`).
+- **Clean UI/UX:** A simple, intuitive, and responsive interface designed for quick and focused interactions.
+- **Cross-Platform:** Built from a single codebase for both Android and iOS.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Framework:** [Flutter](https://flutter.dev/)
+- **Language:** Dart
+- **Database:** `sqflite` (SQLite plugin for Flutter)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Getting Started
+
+To run this project locally, ensure you have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed.
+
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-link>
+   ```
+2. **Navigate to the project directory:**
+   ```bash
+   cd noteapp
+   ```
+3. **Install dependencies:**
+   ```bash
+   flutter pub get
+   ```
+4. **Run the application:**
+   ```bash
+   flutter run
+   ```
+
